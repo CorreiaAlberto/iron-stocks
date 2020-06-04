@@ -8,9 +8,7 @@ router.get('/', (req, res, next) => {
   res.render('index');
 });
 //Get search page
-router.get('/search-company',(req, res, next) => {
-  res.render('search-company')
-})
+
 
 
 

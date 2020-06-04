@@ -55,6 +55,7 @@ const index = require('./routes/index');
 app.use('/', index);
 
 const searchCompany = require('./routes/search-company');
+app.use('/', searchCompany)
 
 
 module.exports = app;
