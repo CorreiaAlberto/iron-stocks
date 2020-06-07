@@ -50,12 +50,14 @@ app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 app.locals.title = 'Iron-Stock';
 
 
-
+//routes
 const index = require('./routes/index');
 app.use('/', index);
 
 const searchCompany = require('./routes/search-company');
 app.use('/', searchCompany)
 
+const showCompany = require('./routes/show-company');
+app.use('/', showCompany)
 
 module.exports = app;
