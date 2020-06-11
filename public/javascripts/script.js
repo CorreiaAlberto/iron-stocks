@@ -1,5 +1,3 @@
-
-
 document.addEventListener('DOMContentLoaded', () => {
 
   console.log('IronGenerator JS imported successfully!');
@@ -19,11 +17,10 @@ document.addEventListener('DOMContentLoaded', () => {
 }, false);
 
 
-
-
 function printTheChart(stockData) {
   const dailyData = stockData['Time Series (Daily)'];
   const stockDates = Object.keys(dailyData);
+  //const stockPrices =Object.values(dailyData)
   const stockPrices = stockDates.map(date => dailyData[date]['4. close']);
   const ctx = document.getElementById('my-chart').getContext('2d');
   

@@ -5,11 +5,18 @@ const bcrypt = require("bcryptjs")
 const User = require("../models/User-model")
 const saltRounds = 10
 const mongoose = require("mongoose")
+const session = require('express-session')
 
 const router = new Router()
 
 router.get("/signup", (req, res) => res.render("auth/signup"))
-router.get("/userProfile", (req, res) => res.render("auth/users/user-profile"))
+
+router.get("/userProfile", (req, res) => {
+  console.log(req.session)
+  res.render("auth/users/user-profile",{user: req.session.currentUser})
+})
+
+router.get('/login', (req, res) => res.render('auth/login'))
 
 router.post("/signup", (req, res) => {
 
@@ -73,5 +80,34 @@ router.post("/signup", (req, res) => {
     })
 
 })
+
+router.post('/login', (req, res, next) => {
+  const { email, password } = req.body;
+   //comprobracion de que todods los campos han sido introducidos
+  if (email === '' || password === '') {
+    res.render('auth/login', {
+      errorMessage: 'Por favor introduzca ambos campos para seguir'
+    });
+    return;
+  }
+//Buscamos usuario por mail
+  User.findOne({ email })
+    .then(user => {
+      if (!user) {
+        //si no hay usuario con ese mail, no esta registrado
+        res.render('auth/login', { errorMessage: 'Este Email no esta registrado, pruebe otro' });
+        return;
+        //comprobamos contraseña
+      } else if (bcrypt.compare(password, user.passwordHash)) {
+        req.session.currentUser = user
+        res.redirect("/userProfile")
+      } else {
+        // si la contraseña no es correcta, mostramos error
+        res.render('auth/login', { errorMessage: 'Contraseña incorrecta.' });
+      }
+    })
+    .catch(error => next(error));
+});
+
 
 module.exports = router;

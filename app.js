@@ -27,6 +27,9 @@ const debug = require('debug')(`${app_name}:${path.basename(__filename).split('.
 
 const app = express();
 
+//Middleware sesion
+require("./configs/session.config")(app)
+
 // Middleware Setup
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -64,7 +67,7 @@ app.use('/', searchCompany)
 
 const showCompany = require('./routes/show-company');
 app.use('/', showCompany)
-//Ruta para singup
+//Ruta para signup
 const signUpRouter = require("./routes/auth.routes")
 app.use('/', signUpRouter)
 
