@@ -6,14 +6,18 @@ const User = require("../models/User-model")
 const saltRounds = 10
 const mongoose = require("mongoose")
 const session = require('express-session')
+const Accion = require("../models/Accion-model")
 
 const router = new Router()
 
 router.get("/signup", (req, res) => res.render("auth/signup"))
 
 router.get("/userProfile", (req, res) => {
-  console.log(req.session)
-  res.render("auth/users/user-profile",{user: req.session.currentUser})
+  Accion.find({userId: req.session.currentUser})
+  .then(acciones=>{
+    res.render("auth/users/user-profile",{user: req.session.currentUser, acciones: acciones})
+  })
+  .catch(e=>e)
 })
 
 router.get('/login', (req, res) => res.render('auth/login'))

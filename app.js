@@ -71,4 +71,7 @@ app.use('/', showCompany)
 const signUpRouter = require("./routes/auth.routes")
 app.use('/', signUpRouter)
 
+const accion= require('./routes/accion')
+app.use('/', accion);
+
 module.exports = app;

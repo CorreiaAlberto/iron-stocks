@@ -2,7 +2,7 @@ const express = require('express');
 const router  = express.Router();
 const axios = require("axios");
 const dotenv = require("dotenv");
-const Accion = require("../models/Accion.model");
+const Accion = require("../models/Accion-model");
 
 
 router.post('/accion',(req,res)=>{
