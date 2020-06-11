@@ -1,7 +1,7 @@
 <form action="/search-company" method="post">
-<label for=""> Introduce company name</label>
-<input type="text" name="company">
-<input type= "submit">
+    <label for=""> Introduce company name</label>
+    <input type="text" name="company">
+    <input type="submit">
 </form>
 {{#each lista}}
 <br>
@@ -12,6 +12,14 @@
 <br>{{this.region}}
 <br>
 <a href="/show-company?symbol={{symbol}}">Show details</a>
-<a href="/show-company?symbol={{symbol}}">Add company</a>
 
-{{/each}} 
+
+<form action="/accion" method="post">
+    <input type="hidden" value="{{this.name}}" name="name">
+    <input type="hidden" value="{{this.symbol}}" name="symbol">
+    <input type="submit" value="Add compagnie">
+</form>
+
+
+
+{{/each}}

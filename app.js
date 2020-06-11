@@ -12,7 +12,7 @@ const bcrypt = require("bcryptjs")
 
 
 mongoose
-  .connect('mongodb://localhost/iron-stock', {
+  .connect('mongodb://localhost/iron-stock2', {
     useNewUrlParser: true
   })
   .then(x => {
